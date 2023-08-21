@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysqldb2:
+    container_name: mysqldb2
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ganesha_db
+  springboot-mysql-rest-services:
+    container_name: springboot-mysql-rest-services
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    #networks:
+     # spring-boot-mysql-net:
+    restart: on-failure
+
+networks:
+  spring-boot-mysql-net:
